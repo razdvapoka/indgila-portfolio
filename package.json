@@ -7,10 +7,12 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
+    "prebuild": "npm run content",
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "lint": "prettier --write src/**/*.js"
+    "lint": "prettier --write src/**/*.js",
+    "content": "node get-content.js"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"
@@ -19,6 +21,8 @@
     "build/*"
   ],
   "devDependencies": {
+    "contentful": "^7.9.1",
+    "dotenv": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
     "per-env": "^1.0.2",
     "preact-cli": "^2.1.0",

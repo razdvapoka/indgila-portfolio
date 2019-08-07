@@ -2,6 +2,7 @@ import { h, Component } from "preact";
 import { Router } from "preact-router";
 
 import Header from "./header";
+import content from "../../content.json";
 
 // Code-splitting is automated for routes
 import Home from "../routes/home";
@@ -20,6 +21,12 @@ export default class App extends Component {
     return (
       <div id="app">
         <Header />
+        <div style={{ marginTop: 100 }}>
+          {content.items.map(item => (
+            <div>{item.fields.title}</div>
+          ))}
+        </div>
+
         <Router onChange={this.handleRoute}>
           <Home path="/" />
           <Profile path="/profile/" user="me" />
