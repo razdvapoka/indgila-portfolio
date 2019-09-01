@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "defaults.css": "^1.2.0",
+    "marked": "^0.7.0",
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
     "preact-markup": "^1.6.0",

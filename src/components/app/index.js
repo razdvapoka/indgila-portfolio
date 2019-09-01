@@ -5,22 +5,66 @@ import Markdown from "../../components/markdown";
 import styles from "./styles.styl";
 import Layout from "../../components/layout";
 import { Router, Link } from "preact-router";
+import { pxToRem } from "../../utils";
 
-const Main = ({ projectId }) => {
-  return (
-    <Layout isMain>
-      <div className={styles.main}>
-        <Huge className={styles.projects} as="ul">
-          {content.projects.items.map(item => (
-            <li>
-              <Link href={"/project/hey"}>{item.fields.title}</Link>
-            </li>
-          ))}
-        </Huge>
-      </div>
-    </Layout>
-  );
-};
+class Main extends Component {
+  state = {
+    selectedProjectSlug: null
+  };
+
+  selectProject = selectedProjectSlug => {
+    this.setState({ selectedProjectSlug });
+  };
+
+  getSelectedProject = () => {
+    const { selectedProjectSlug } = this.state;
+    const projects = content.projects.fields.projects;
+    if (selectedProjectSlug) {
+      const selectedProjects = projects.filter(p => p.fields.slug === selectedProjectSlug);
+      return selectedProjects.length > 0 ? selectedProjects[0] : null;
+    }
+  };
+
+  getProjectPreview = project => {
+    return project && project.fields.images.length > 0 ? project.fields.images[0] : null;
+  };
+
+  render({ projectId }) {
+    const { selectedProjectSlug } = this.state;
+    const selectedProject = this.getSelectedProject();
+    const selectedProjectPreview = this.getProjectPreview(selectedProject);
+    const previewWidthPx =
+      selectedProjectPreview && selectedProjectPreview.fields.file.details.image.width / 2;
+    const previewWidthRem = pxToRem(previewWidthPx);
+    return (
+      <Layout isMain>
+        <div className={styles.main}>
+          {selectedProjectPreview && (
+            <div className={styles.projectBox}>
+              <img
+                className={styles.preview}
+                src={`${selectedProjectPreview.fields.file.url}?w=${previewWidthPx}&q=1`}
+                style={{ width: previewWidthRem }}
+              />
+            </div>
+          )}
+          <Huge className={styles.projects} as="ul">
+            {content.projects.fields.projects.map(item => (
+              <li>
+                {item.fields.title}
+                <Link
+                  onMouseEnter={() => this.selectProject(item.fields.slug)}
+                  onMouseLeave={() => this.selectProject(null)}
+                  href={`/project/${item.fields.slug}`}
+                />
+              </li>
+            ))}
+          </Huge>
+        </div>
+      </Layout>
+    );
+  }
+}
 
 const About = props => {
   return (
@@ -64,7 +108,6 @@ const About = props => {
 
 export default class App extends Component {
   render() {
-    console.log(content);
     return (
       <Router>
         <Main path="/" />

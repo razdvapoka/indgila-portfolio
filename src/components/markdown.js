@@ -1,6 +1,6 @@
-var preact = require("preact");
-var Markup = require("preact-markup");
-var marked = require("marked");
+import preact from "preact";
+import Markup from "preact-markup";
+import marked from "marked";
 
 const Markdown = ({ markdown, markupOpts = {}, markdownOpts = {}, ...rest }) => (
   <Markup
