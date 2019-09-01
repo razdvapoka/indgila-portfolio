@@ -1,0 +1,28 @@
+@import './consts.styl'
+@import './text.styl'
+@import './fonts.styl'
+@import './utils.styl'
+
+html, body
+  height: 100%
+  width: 100%
+	font-weight: 400
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+
+:root {
+  font-family: Pragmatica, Helvetica, arial, sans-serif
+  font-weight: normal
+  font-size: ($ROOT_FONT_SIZE / $CANONIC_SCREEN_WIDTH * 100) vw
+}
+
++mobile()
+  :root {
+    font-size: ($ROOT_FONT_SIZE / $CANONIC_SCREEN_WIDTH_M * 100) vw
+  }
+
+#app
+  height: 100%
+
+*:focus
+  outline: none

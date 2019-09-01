@@ -1,0 +1,20 @@
+@import './consts.styl'
+
+hide()
+  display: none
+
+childrenSpacingY(space)
+  > * + *
+    margin-top: space
+
+childrenSpacingX(space)
+  > * + *
+    margin-left: space
+
+pxToRem(px)
+  (px / $ROOT_FONT_SIZE) rem
+
+.centered
+  display: flex
+  align-items: center
+  justify-content: center

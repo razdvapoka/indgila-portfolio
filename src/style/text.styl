@@ -1,0 +1,20 @@
+@import './utils.styl'
+@import './media.styl'
+
+.small-text
+  font-size: pxToRem(20)
+  line-height: 1
+  +mobile()
+    font-size: pxToRem(10)
+
+.regular-text
+  font-size: pxToRem(40)
+  line-height: 1
+  +mobile()
+    font-size: pxToRem(15)
+
+.huge-text
+  font-size: pxToRem(80)
+  line-height: (70 / 80)
+  +mobile()
+    font-size: pxToRem(10)

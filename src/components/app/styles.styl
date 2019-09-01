@@ -1,0 +1,44 @@
+@import '../../style/utils.styl'
+@import '../../style/media.styl'
+
+.main
+  display: flex
+  justify-content: flex-end
+
+.projects
+  childrenSpacingY(pxToRem(10))
+  list-style-type: none
+
+.about
+  margin: 0 auto
+  max-width: pxToRem(950)
+  margin-bottom: pxToRem(60)
+  +mobile()
+    margin-top: pxToRem(10)
+    margin-bottom: 0
+  &Description
+    childrenSpacingY(pxToRem(40))
+    +mobile()
+      childrenSpacingY(pxToRem(20))
+  &Lists
+    margin-top: pxToRem(90)
+    display: flex
+    childrenSpacingX(pxToRem(40))
+    +mobile()
+      margin-top: pxToRem(50)
+      flex-direction: column
+      childrenSpacingX(0)
+      childrenSpacingY(pxToRem(20))
+  &ListsCol
+    flex: 1
+    childrenSpacingY(pxToRem(50))
+    +mobile()
+      childrenSpacingY(pxToRem(20))
+  &List
+    childrenSpacingY(pxToRem(20))
+    p:first-child
+      margin-bottom: pxToRem(40)
+      +mobile()
+        margin-bottom: pxToRem(20)
+    +mobile()
+      childrenSpacingY(pxToRem(10))

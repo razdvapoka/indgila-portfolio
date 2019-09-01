@@ -7,7 +7,13 @@ var client = contentful.createClient({
   space: space,
   accessToken: accessToken
 });
-client.getEntries().then(function(entries) {
-  fs.writeFileSync("./content.json", JSON.stringify(entries));
-  console.log("done!");
-});
+
+Promise.all([
+  client.getEntries({ content_type: "project" }),
+  client.getEntries({ content_type: "about" })
+])
+  .then(([projects, about]) => {
+    fs.writeFileSync("./content.json", JSON.stringify({ projects, about: about.items[0] }));
+    console.log("done!");
+  })
+  .catch(err => console.log(err));

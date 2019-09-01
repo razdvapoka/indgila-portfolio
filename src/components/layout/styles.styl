@@ -1,0 +1,47 @@
+@import '../../style/media.styl'
+@import '../../style/utils.styl'
+
+$paddingTop = pxToRem(20)
+$paddingLeft = pxToRem(20)
+
+$paddingTopM = pxToRem(10)
+$paddingLeftM = pxToRem(10)
+
+.layout
+  padding: $paddingTop $paddingLeft
+  +mobile()
+    padding: $paddingTopM $paddingLeftM
+
+.top
+  display: flex
+  justify-content: space-between
+
+.home
+  position: fixed
+  left: $paddingLeft
+  top: $paddingTop
+  line-height: (35 / 40)
+  +mobile()
+    position: static
+
+.blog
+  position: fixed
+  right: $paddingLeft
+  top: $paddingTop
+  +mobile()
+    position: static
+
+.copyright
+  position: fixed
+  left: $paddingLeft
+  bottom: $paddingTop
+  +mobile()
+    position: static
+    margin-top: pxToRem(50)
+
+.persian
+  font-family: Helvetica, arial, sans-serif
+  margin-top: pxToRem(10)
+  display: block
+  +mobile()
+    margin-top: pxToRem(5)
