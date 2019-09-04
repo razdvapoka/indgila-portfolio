@@ -1,3 +1,5 @@
+require("intersection-observer");
+
 import "defaults.css";
 import "./style/index.styl";
 import App from "./components/app";
