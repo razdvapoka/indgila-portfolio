@@ -1,55 +1,116 @@
 import { Component } from "preact";
-import content from "../../../content.json";
-import { Small, Huge, Regular } from "../../components/text";
-import Markdown from "../../components/markdown";
-import styles from "./styles.styl";
-import Layout from "../../components/layout";
 import { Router, Link } from "preact-router";
-import { pxToRem } from "../../utils";
+
+import { Small, Huge, Regular } from "../../components/text";
+import { findFirstBy, head, pxToRem } from "../../utils";
+import Layout from "../../components/layout";
+import Markdown from "../../components/markdown";
+import content from "../../../content.json";
+import styles from "./styles.styl";
+
+class Image extends Component {
+  state = {
+    isLoaded: this.props.isInCache,
+    observer: null
+  };
+
+  checkVisibility = intersectionEntries => {
+    const { observer } = this.state;
+    if (intersectionEntries[0].intersectionRatio > 0.1) {
+      this.loadImage();
+      if (observer) {
+        observer.unobserve(this.base);
+        this.setState({ observer: null });
+      }
+    }
+  };
+
+  loadImage = () => {
+    const { url, width, slug, addToCache } = this.props;
+    const image = new window.Image();
+    image.onload = () => {
+      this.setState({ isLoaded: true });
+      addToCache(slug);
+    };
+    image.src = this.getImageUrl(false);
+  };
+
+  getImageUrl = isLowQuality => {
+    const { url, width } = this.props;
+    return `${url}?w=${isLowQuality ? width / 2 : width}${isLowQuality ? "&q=1" : ""}`;
+  };
+
+  componentDidMount() {
+    if (!this.props.isInCache) {
+      const observer = new IntersectionObserver(this.checkVisibility);
+      observer.observe(this.base);
+      this.setState({ observer });
+    }
+  }
+
+  render({ url, width, ...rest }, { isLoaded }) {
+    const src = this.getImageUrl(!isLoaded);
+    return (
+      <img
+        className={isLoaded ? styles.image : styles.imagePreview}
+        src={src}
+        style={{ width: pxToRem(width / 2) }}
+        {...rest}
+      />
+    );
+  }
+}
 
 class Main extends Component {
   state = {
-    selectedProjectSlug: null
+    selectedProjectSlug: null,
+    imageCache: []
   };
 
   selectProject = selectedProjectSlug => {
     this.setState({ selectedProjectSlug });
   };
 
-  getSelectedProject = () => {
-    const { selectedProjectSlug } = this.state;
+  getProjectBySlug = projectSlug => {
     const projects = content.projects.fields.projects;
-    if (selectedProjectSlug) {
-      const selectedProjects = projects.filter(p => p.fields.slug === selectedProjectSlug);
-      return selectedProjects.length > 0 ? selectedProjects[0] : null;
-    }
+    return findFirstBy(projects, p => p.fields.slug === projectSlug);
   };
 
-  getProjectPreview = project => {
-    return project && project.fields.images.length > 0 ? project.fields.images[0] : null;
+  getProjectImages = project => project && project.fields.images;
+
+  getImageWidth = image => image.fields.file.details.image.width;
+
+  addToCache = slug => {
+    this.setState({
+      imageCache: [...this.state.imageCache, slug]
+    });
   };
 
-  render({ projectId }) {
-    const { selectedProjectSlug } = this.state;
-    const selectedProject = this.getSelectedProject();
-    const selectedProjectPreview = this.getProjectPreview(selectedProject);
-    const previewWidthPx =
-      selectedProjectPreview && selectedProjectPreview.fields.file.details.image.width / 2;
-    const previewWidthRem = pxToRem(previewWidthPx);
+  render({ projectSlug }, { selectedProjectSlug, imageCache }) {
+    const selectedProject = this.getProjectBySlug(selectedProjectSlug);
+    const selectedProjectPreview = head(this.getProjectImages(selectedProject));
+    const previewWidthPx = selectedProjectPreview && this.getImageWidth(selectedProjectPreview);
     return (
       <Layout isMain>
         <div className={styles.main}>
           {selectedProjectPreview && (
             <div className={styles.projectBox}>
-              <img
-                className={styles.preview}
-                src={`${selectedProjectPreview.fields.file.url}?w=${previewWidthPx}&q=1`}
-                style={{ width: previewWidthRem }}
+              <Image
+                key={selectedProjectSlug}
+                url={selectedProjectPreview.fields.file.url}
+                width={previewWidthPx}
+                slug={selectedProjectSlug}
+                addToCache={this.addToCache}
+                isInCache={imageCache.indexOf(selectedProjectSlug) !== -1}
               />
             </div>
           )}
           <Huge className={styles.projects} as="ul">
-            {content.projects.fields.projects.map(item => (
+            {[
+              ...content.projects.fields.projects,
+              ...content.projects.fields.projects,
+              ...content.projects.fields.projects
+            ].map(item => (
               <li>
                 {item.fields.title}
                 <Link
@@ -111,7 +172,7 @@ export default class App extends Component {
     return (
       <Router>
         <Main path="/" />
-        <Main path="/project/:projectId" />
+        <Main path="/project/:projectSlug" />
         <About path="/about" />
       </Router>
     );

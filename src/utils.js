@@ -10,3 +10,6 @@ export const withClass = givenClassName => Component => ({ className, ...props }
 );
 
 export const pxToRem = px => `${px / ROOT_FONT_SIZE}rem`;
+
+export const head = arr => (Array.isArray(arr) && arr.length > 0 ? arr[0] : null);
+export const findFirstBy = (arr, predicate) => head(arr.filter(predicate));
