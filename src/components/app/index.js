@@ -1,5 +1,5 @@
 import { Component } from "preact";
-import { Router, Link } from "preact-router";
+import { Router, Link, route } from "preact-router";
 
 import { Small, Huge, Regular } from "../../components/text";
 import { findFirstBy, head, pxToRem } from "../../utils";
@@ -16,7 +16,8 @@ class Image extends Component {
 
   checkVisibility = intersectionEntries => {
     const { observer } = this.state;
-    if (intersectionEntries[0].intersectionRatio > 0.1) {
+    const { slug, index } = this.props;
+    if (intersectionEntries[0].intersectionRatio > 0) {
       this.loadImage();
       if (observer) {
         observer.unobserve(this.base);
@@ -26,11 +27,11 @@ class Image extends Component {
   };
 
   loadImage = () => {
-    const { url, width, slug, addToCache } = this.props;
+    const { url, width, index, slug, addToCache } = this.props;
     const image = new window.Image();
     image.onload = () => {
       this.setState({ isLoaded: true });
-      addToCache(slug);
+      addToCache(`${slug}-${index}`);
     };
     image.src = this.getImageUrl(false);
   };
@@ -86,26 +87,42 @@ class Main extends Component {
     });
   };
 
+  goHome = () => route("/");
+
   render({ projectSlug }, { selectedProjectSlug, imageCache }) {
-    const selectedProject = this.getProjectBySlug(selectedProjectSlug);
-    const selectedProjectPreview = head(this.getProjectImages(selectedProject));
-    const previewWidthPx = selectedProjectPreview && this.getImageWidth(selectedProjectPreview);
+    const activeProjectSlug = projectSlug || selectedProjectSlug;
+    const activeProject = this.getProjectBySlug(activeProjectSlug);
+    const activeProjectImages = this.getProjectImages(activeProject);
+    const isProjectOpen = !!projectSlug;
     return (
       <Layout isMain>
         <div className={styles.main}>
-          {selectedProjectPreview && (
-            <div className={styles.projectBox}>
-              <Image
-                key={selectedProjectSlug}
-                url={selectedProjectPreview.fields.file.url}
-                width={previewWidthPx}
-                slug={selectedProjectSlug}
-                addToCache={this.addToCache}
-                isInCache={imageCache.indexOf(selectedProjectSlug) !== -1}
-              />
+          {activeProject && (
+            <div className={styles.projectBox} onClick={this.goHome}>
+              {activeProjectImages
+                .slice(0, projectSlug ? activeProjectImages.length : 1)
+                .map((image, imageIndex) => {
+                  const projectKey = `${activeProject.fields.slug}-${imageIndex}`;
+                  const isProjectInCache = imageCache.indexOf(projectKey) !== -1;
+                  return (
+                    <Image
+                      key={projectKey}
+                      index={imageIndex}
+                      url={image.fields.file.url}
+                      width={this.getImageWidth(image)}
+                      slug={activeProject.fields.slug}
+                      addToCache={this.addToCache}
+                      isInCache={isProjectInCache}
+                    />
+                  );
+                })}
             </div>
           )}
-          <Huge className={styles.projects} as="ul">
+          <Huge
+            id="projectList"
+            className={isProjectOpen ? styles.projectListFixed : styles.projectList}
+            as="ul"
+          >
             {[
               ...content.projects.fields.projects,
               ...content.projects.fields.projects,

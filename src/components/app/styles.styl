@@ -1,15 +1,25 @@
 @import '../../style/utils.styl'
 @import '../../style/media.styl'
 
-.main
-  position: relative
-  display: flex
-  justify-content: flex-end
+// .main
+//   position: relative
 
-.projects
+.projectList
+.projectListFixed
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  position: absolute
+  top: 0
+  right: 0
+  padding: pxToRem(20) pxToRem(20)
+  width: 100vw
+  height: 100vh
+  overflow: auto
   childrenSpacingY(pxToRem(10))
   list-style-type: none
   padding-bottom: pxToRem(20)
+  transition: color 0.3s ease
   li
     position: relative
     a
@@ -19,6 +29,10 @@
       width: 100%
       height: 100%
       z-index: 100
+
+.projectListFixed
+  position: fixed
+  overflow: hidden
 
 .about
   margin: 0 auto
@@ -55,15 +69,13 @@
       childrenSpacingY(pxToRem(10))
 
 .projectBox
-  max-width: pxToRem(800)
-  position: fixed
-  top: pxToRem(20)
-  left: 50%
-  transform: translateX(-50%)
-  display: flex
-  flex-direction: column
-  align-items: center
+  position: relative
   z-index: 10
+  padding-top: 30vh
+  childrenSpacingY(pxToRem(3))
+  max-width: pxToRem(800)
+  margin: 0 auto
+  text-align: center
 
  .imagePreview
    transition: filter 0.3s ease;
