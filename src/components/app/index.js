@@ -127,16 +127,20 @@ class Main extends Component {
               ...content.projects.fields.projects,
               ...content.projects.fields.projects,
               ...content.projects.fields.projects
-            ].map(item => (
-              <li>
-                {item.fields.title}
-                <Link
-                  onMouseEnter={() => this.selectProject(item.fields.slug)}
-                  onMouseLeave={() => this.selectProject(null)}
-                  href={`/project/${item.fields.slug}`}
-                />
-              </li>
-            ))}
+            ].map(item => {
+              const { title, slug } = item.fields;
+              const isActive = slug === activeProjectSlug;
+              return (
+                <li className={isActive ? styles.projectActive : styles.project}>
+                  {item.fields.title}
+                  <Link
+                    onMouseEnter={() => this.selectProject(item.fields.slug)}
+                    onMouseLeave={() => this.selectProject(null)}
+                    href={`/project/${item.fields.slug}`}
+                  />
+                </li>
+              );
+            })}
           </Huge>
         </div>
       </Layout>
