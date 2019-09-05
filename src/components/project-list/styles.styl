@@ -1,0 +1,39 @@
+@import '../../style/utils.styl'
+@import '../../style/media.styl'
+
+.project
+.projectGrey
+  transition: color 0.2s ease
+
+.projectGrey
+  color: $GREY
+
+.projectList
+.projectListFixed
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  position: absolute
+  top: 0
+  right: 0
+  padding: pxToRem(20) pxToRem(20)
+  width: 100vw
+  height: 100vh
+  overflow: auto
+  childrenSpacingY(pxToRem(10))
+  list-style-type: none
+  padding-bottom: pxToRem(20)
+  transition: color 0.3s ease
+  li
+    position: relative
+    a
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      z-index: 100
+
+.projectListFixed
+  position: fixed
+  overflow: hidden
