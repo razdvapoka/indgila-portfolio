@@ -52,13 +52,6 @@ class Main extends Component {
               addToCache={this.addToCache}
             />
           )}
-          {isProjectOpen && activeProject.fields.description && (
-            <Small
-              className={styles.projectDescription}
-              as={Markdown}
-              markdown={activeProject.fields.description}
-            />
-          )}
           <ProjectList
             projects={[
               ...content.projects.fields.projects,
@@ -69,6 +62,13 @@ class Main extends Component {
             activeProjectSlug={activeProjectSlug}
             selectProject={this.selectProject}
           />
+          {isProjectOpen && activeProject.fields.description && (
+            <Small
+              className={styles.projectDescription}
+              as={Markdown}
+              markdown={activeProject.fields.description}
+            />
+          )}
         </div>
       </Layout>
     );
