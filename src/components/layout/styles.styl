@@ -21,6 +21,7 @@ $paddingLeftM = pxToRem(10)
   left: $paddingLeft
   top: $paddingTop
   line-height: (35 / 40)
+  z-index: 10
   +mobile()
     position: static
 
@@ -32,9 +33,18 @@ $paddingLeftM = pxToRem(10)
     position: static
 
 .copyright
+.copyrightUnderProject
   position: fixed
   left: $paddingLeft
   bottom: $paddingTop
+
+.copyright
+  +mobile()
+    position: absolute
+    left: $paddingLeftM
+    bottom: $paddingTopM
+
+.copyrightUnderProject
   +mobile()
     position: static
     margin-top: pxToRem(50)

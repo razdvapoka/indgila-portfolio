@@ -41,7 +41,7 @@ class Main extends Component {
     const activeProjectImages = this.getProjectImages(activeProject);
     const isProjectOpen = !!projectSlug;
     return (
-      <Layout isMain>
+      <Layout isMain isProjectOpen={isProjectOpen}>
         <div>
           {activeProject && (
             <Project

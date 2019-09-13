@@ -49,7 +49,7 @@ class Image extends Component {
       <img
         className={isLoaded ? styles.image : styles.imagePreview}
         src={src}
-        style={{ width: pxToRem(width / 2) }}
+        style={{ width: window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2) }}
         {...rest}
       />
     );

@@ -1,10 +1,11 @@
 import styles from "./styles.styl";
 import { Regular, Small } from "../../components/text";
+import { Link } from "preact-router";
 
-const Layout = ({ children, hasCopy, blogUrl }) => (
+const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen }) => (
   <div className={styles.layout}>
     <div className={styles.top}>
-      <Regular as="a" to="#" className={styles.home}>
+      <Regular as={Link} href={isMain ? "/about" : "/"} className={styles.home}>
         indgila
         <br />
         инджила
@@ -24,7 +25,9 @@ const Layout = ({ children, hasCopy, blogUrl }) => (
       )}
     </div>
     {children}
-    <Small className={styles.copyright}>© 2019 indgila</Small>
+    <Small className={isProjectOpen ? styles.copyrightUnderProject : styles.copyright}>
+      © 2019 indgila
+    </Small>
   </div>
 );
 
