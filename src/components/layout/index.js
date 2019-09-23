@@ -1,6 +1,7 @@
 import styles from "./styles.styl";
 import { Regular, Small } from "../../components/text";
 import { Link } from "preact-router";
+import PersianName from "../../components/persian-name";
 
 const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen }) => (
   <div className={styles.layout}>
@@ -10,7 +11,9 @@ const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen }) => (
         <br />
         инджила
         <br />
-        <span className={styles.persian}>آنجیلا</span>
+        <div className={styles.persian}>
+          <PersianName />
+        </div>
       </Regular>
       {blogUrl && (
         <Regular
