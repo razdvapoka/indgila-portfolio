@@ -1,8 +1,9 @@
 import { Small } from "../text";
+import { pxToRem } from "../../utils";
 import Image from "../image";
 import Markdown from "../markdown";
+import Video from "../video";
 import styles from "./styles.styl";
-import { pxToRem } from "../../utils";
 
 const TOP_OFFSET = 20;
 const MAX_IMAGE_WIDTH = 800;
@@ -20,9 +21,12 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
   return (
     <div className={styles.projectBox} style={{ transform: `translateY(-${verticalShift})` }}>
       {images.slice(0, isProjectOpen ? images.length : 1).map((image, imageIndex) => {
+        const isVideo = image.fields.file.contentType.startsWith("video");
         const projectKey = `${slug}-${imageIndex}`;
         const isProjectInCache = imageCache.indexOf(projectKey) !== -1;
-        return (
+        return isVideo ? (
+          <Video muted loop src={image.fields.file.url} />
+        ) : (
           <Image
             key={projectKey}
             index={imageIndex}
