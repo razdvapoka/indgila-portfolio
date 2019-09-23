@@ -41,13 +41,12 @@ class Main extends Component {
     const activeProjectImages = this.getProjectImages(activeProject);
     const isProjectOpen = !!projectSlug;
     return (
-      <Layout isMain isProjectOpen={isProjectOpen}>
+      <Layout isMain isProjectOpen={isProjectOpen} onClick={() => isProjectOpen && this.goHome()}>
         <div>
           {activeProject && (
             <Project
               isProjectOpen={isProjectOpen}
               project={activeProject}
-              goHome={this.goHome}
               imageCache={imageCache}
               addToCache={this.addToCache}
             />

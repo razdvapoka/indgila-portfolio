@@ -13,16 +13,12 @@ const getVerticalShift = firstImage => {
   return window.innerWidth < 600 ? 0 : pxToRem(realHeight / 2 + TOP_OFFSET);
 };
 
-const Project = ({ goHome, project, isProjectOpen, imageCache, addToCache }) => {
+const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
   const { images, slug, description } = project.fields;
   const firstImage = images.map(i => i.fields.file.details.image)[0];
   const verticalShift = getVerticalShift(firstImage);
   return (
-    <div
-      className={styles.projectBox}
-      onClick={goHome}
-      style={{ transform: `translateY(-${verticalShift})` }}
-    >
+    <div className={styles.projectBox} style={{ transform: `translateY(-${verticalShift})` }}>
       {images.slice(0, isProjectOpen ? images.length : 1).map((image, imageIndex) => {
         const projectKey = `${slug}-${imageIndex}`;
         const isProjectInCache = imageCache.indexOf(projectKey) !== -1;
