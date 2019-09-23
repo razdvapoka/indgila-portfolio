@@ -22,8 +22,8 @@ const ProjectList = ({ projects, selectProject, isProjectOpen, activeProjectSlug
         <li className={projectClassName}>
           {title}
           <Link
-            onMouseEnter={() => selectProject(slug)}
-            onMouseLeave={() => selectProject(null)}
+            onMouseEnter={() => window.innerWidth >= 600 && selectProject(slug)}
+            onMouseLeave={() => window.innerWidth >= 600 && selectProject(null)}
             href={`/project/${slug}`}
           />
         </li>
