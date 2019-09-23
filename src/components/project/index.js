@@ -5,17 +5,12 @@ import styles from "./styles.styl";
 import { pxToRem } from "../../utils";
 
 const TOP_OFFSET = 20;
-const TOP_OFFSET_M = 50;
-const HOR_PADDING_M = 20;
 const MAX_IMAGE_WIDTH = 800;
 
 const getVerticalShift = firstImage => {
-  const isMobile = window.innerWidth < 600;
-  const realWidth = isMobile
-    ? window.innerWidth - HOR_PADDING_M * 2
-    : Math.min(firstImage.width / 2, MAX_IMAGE_WIDTH);
+  const realWidth = Math.min(firstImage.width / 2, MAX_IMAGE_WIDTH);
   const realHeight = (firstImage.height * realWidth) / firstImage.width;
-  return pxToRem(realHeight / 2 + (isMobile ? TOP_OFFSET_M : TOP_OFFSET));
+  return window.innerWidth < 600 ? 0 : pxToRem(realHeight / 2 + TOP_OFFSET);
 };
 
 const Project = ({ goHome, project, isProjectOpen, imageCache, addToCache }) => {
