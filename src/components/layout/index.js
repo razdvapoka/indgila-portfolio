@@ -4,7 +4,7 @@ import { Link } from "preact-router";
 import PersianName from "../../components/persian-name";
 
 const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen, ...rest }) => (
-  <div className={styles.layout} {...rest}>
+  <div className={`${styles.layout} ${isMain ? "" : styles.layoutAbout}`} {...rest}>
     <div className={styles.top}>
       <Regular as={Link} href={isMain ? "/about" : "/"} className={styles.home}>
         indgila
