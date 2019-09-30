@@ -8,3 +8,8 @@
 .image
   transition: filter 0.3s ease
   filter: blur(0)
+
+.image:last-child
+  margin-bottom: pxToRem(50)
+  +mobile()
+    margin-bottom: 0

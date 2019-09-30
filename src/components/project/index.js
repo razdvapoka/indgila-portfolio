@@ -19,7 +19,7 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
   const firstImage = images.map(i => i.fields.file.details.image)[0];
   const verticalShift = getVerticalShift(firstImage);
   return (
-    <div className={styles.projectBox} style={{ transform: `translateY(-${verticalShift})` }}>
+    <div className={styles.projectBox} style={{ marginBottom: `-${verticalShift}` }}>
       {images.slice(0, isProjectOpen ? images.length : 1).map((image, imageIndex) => {
         const isVideo = image.fields.file.contentType.startsWith("video");
         const projectKey = `${slug}-${imageIndex}`;
@@ -29,6 +29,7 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
         ) : (
           <Image
             key={projectKey}
+            style={imageIndex === 0 && { marginTop: `-${verticalShift}` }}
             index={imageIndex}
             url={image.fields.file.url}
             width={image.fields.file.details.image.width}

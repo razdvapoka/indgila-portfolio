@@ -61,7 +61,7 @@ class Main extends Component {
             activeProjectSlug={activeProjectSlug}
             selectProject={this.selectProject}
           />
-          {activeProject && activeProject.fields.description && (
+          {isProjectOpen && activeProject.fields.description && (
             <Small
               className={styles.projectDescription}
               as={Markdown}
