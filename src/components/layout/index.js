@@ -34,6 +34,20 @@ const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen, ...rest }) 
       )}
     </div>
     {children}
+    {!isMain && (
+      <Small className={styles.contacts}>
+        <a href="">email</a>
+        <br />
+        <a href="">call</a>
+        <br />
+        <a href="">facebook</a>
+        <br />
+        <a href="">instagram</a>
+        <br />
+        <a href="">telegram</a>
+        <br />
+      </Small>
+    )}
     <Small className={isProjectOpen ? styles.copyrightUnderProject : styles.copyright}>
       © 2019 indgila
     </Small>

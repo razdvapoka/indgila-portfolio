@@ -14,7 +14,7 @@ $paddingLeftM = pxToRem(6)
 
 .layoutAbout
   +mobile()
-    padding: $paddingTopM $paddingLeftM pxToRem(70)
+    padding: $paddingTopM $paddingLeftM pxToRem(100)
     position: relative
 
 .layoutProjectOpen
@@ -63,3 +63,13 @@ $paddingLeftM = pxToRem(6)
   width: pxToRem(84)
   +mobile()
     width: pxToRem(31)
+
+.contacts
+  position: fixed
+  left: $paddingLeft
+  bottom: pxToRem(50)
+  +mobile()
+    position: absolute
+    left: $paddingLeftM
+    bottom: $paddingTopM + pxToRem(15)
+
