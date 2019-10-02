@@ -52,11 +52,7 @@ class Main extends Component {
             />
           )}
           <ProjectList
-            projects={[
-              ...content.projects.fields.projects,
-              ...content.projects.fields.projects,
-              ...content.projects.fields.projects
-            ]}
+            projects={content.projects.fields.projects}
             isProjectOpen={isProjectOpen}
             activeProjectSlug={activeProjectSlug}
             selectProject={this.selectProject}

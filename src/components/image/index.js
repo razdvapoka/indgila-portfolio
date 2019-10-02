@@ -43,13 +43,16 @@ class Image extends Component {
     }
   }
 
-  render({ url, width, ...rest }, { isLoaded }) {
+  render({ url, width, style, ...rest }, { isLoaded }) {
     const src = this.getImageUrl(!isLoaded);
     return (
       <img
         className={isLoaded ? styles.image : styles.imagePreview}
         src={src}
-        style={{ width: window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2) }}
+        style={{
+          ...style,
+          width: window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2)
+        }}
         {...rest}
       />
     );
