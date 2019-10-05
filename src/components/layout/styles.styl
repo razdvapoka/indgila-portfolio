@@ -14,8 +14,10 @@ $paddingLeftM = pxToRem(6)
 
 .layoutAbout
   +mobile()
-    padding: $paddingTopM $paddingLeftM pxToRem(100)
+    padding: $paddingTopM $paddingLeftM pxToRem(71)
     position: relative
+    .copyright
+      position: absolute
 
 //.layoutProjectOpen
   //cursor: url(/assets/x.svg), auto
@@ -68,7 +70,5 @@ $paddingLeftM = pxToRem(6)
   left: $paddingLeft
   bottom: pxToRem(50)
   +mobile()
-    position: absolute
-    left: $paddingLeftM
-    bottom: $paddingTopM + pxToRem(15)
+    display: none
 

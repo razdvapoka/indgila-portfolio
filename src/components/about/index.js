@@ -12,6 +12,15 @@ const About = () => (
         as={Markdown}
         markdown={content.about.fields.description}
       />
+      <Regular className={styles.aboutContacts}>
+        <a href="">email</a>
+        <br />
+        <a href="">call</a>
+        <br />
+        <a href="">facebook</a>
+        <br />
+        <a href="">instagram</a>
+      </Regular>
       <div className={styles.aboutLists}>
         <div className={styles.aboutListsCol}>
           <Small

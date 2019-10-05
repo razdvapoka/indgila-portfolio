@@ -14,12 +14,17 @@
     childrenSpacingY(pxToRem(40))
     +mobile()
       childrenSpacingY(pxToRem(20))
+  &Contacts
+    display: none
+    +mobile()
+      display: block
+      margin-top: pxToRem(20)
   &Lists
     margin-top: pxToRem(90)
     display: flex
     childrenSpacingX(pxToRem(40))
     +mobile()
-      margin-top: pxToRem(53)
+      margin-top: pxToRem(40)
       flex-direction: column
       childrenSpacingX(0)
       childrenSpacingY(pxToRem(20))
