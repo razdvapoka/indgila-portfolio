@@ -9,6 +9,11 @@
   margin: 0 auto
   text-align: center
   margin-top: 50vh
+  > *:last-child
+  > *:last-child > video
+    margin-bottom: pxToRem(50)
+    +mobile()
+      margin-bottom: 0
   +mobile()
     margin-top: pxToRem(120)
     width: 100vw

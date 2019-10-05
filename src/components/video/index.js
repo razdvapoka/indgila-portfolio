@@ -12,7 +12,7 @@ class Video extends Component {
     const { observer, isPlaying } = this.state;
     const { slug, index } = this.props;
     if (intersectionEntries[0].intersectionRatio > 0) {
-      if (window.innerWidth < 600) {
+      if (window.innerWidth > 600) {
         this.launchVideo();
       }
     } else {
@@ -22,20 +22,41 @@ class Video extends Component {
     }
   };
 
+  getVideoNode = () => this.base.firstChild;
+
   launchVideo = () => {
-    this.base.play();
+    const video = this.getVideoNode();
+    video.play();
     this.setState({ isPlaying: true });
   };
 
   pauseVideo = () => {
-    this.base.pause();
+    const video = this.getVideoNode();
+    video.pause();
     this.setState({ isPlaying: false });
+  };
+
+  handlePlayClick = e => {
+    e.stopPropagation();
+    const { isPlaying } = this.state;
+    this.launchVideo();
+  };
+
+  handleVideoClick = e => {
+    e.stopPropagation();
+    const { isPlaying } = this.state;
+    if (isPlaying) {
+      this.pauseVideo();
+    } else {
+      this.launchVideo();
+    }
   };
 
   componentDidMount() {
     const observer = new IntersectionObserver(this.checkVisibility);
     observer.observe(this.base);
     this.setState({ observer });
+    this.base.firstChild.addEventListener("webkitendfullscreen", this.pauseVideo);
   }
 
   componentWillUnmount() {
@@ -43,10 +64,29 @@ class Video extends Component {
     if (observer) {
       observer.unobserve(this.base);
     }
+    this.base.firstChild.removeEventListener("webkitendfullscreen", this.pauseVideo);
   }
 
-  render(props) {
-    return <video {...props} />;
+  render({ width, ...rest }, { isPlaying }) {
+    return (
+      <div class={styles.videoBox} onClick={this.handleVideoClick}>
+        <video
+          {...rest}
+          class={styles.video}
+          muted
+          loop
+          {...(window.innerWidth >= 600 ? { autoPlay: true } : {})}
+          style={{
+            width: window && window.innerWidth < 600 ? "100%" : pxToRem(width)
+          }}
+        />
+        {isPlaying || (
+          <button class={styles.videoPlayButton} onClick={this.handlePlayClick}>
+            play
+          </button>
+        )}
+      </div>
+    );
   }
 }
 

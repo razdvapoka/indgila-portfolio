@@ -9,7 +9,7 @@ var client = contentful.createClient({
 });
 
 Promise.all([
-  client.getEntries({ content_type: "projects" }),
+  client.getEntries({ content_type: "projects", include: 5 }),
   client.getEntries({ content_type: "about" })
 ])
   .then(([projects, about]) => {

@@ -25,7 +25,7 @@ class Main extends Component {
     return findFirstBy(projects, p => p.fields.slug === projectSlug);
   };
 
-  getProjectImages = project => project && project.fields.images;
+  getProjectItems = project => project && project.fields.items;
 
   addToCache = slug => {
     this.setState({
@@ -38,7 +38,6 @@ class Main extends Component {
   render({ projectSlug }, { selectedProjectSlug, imageCache }) {
     const activeProjectSlug = projectSlug || selectedProjectSlug;
     const activeProject = this.getProjectBySlug(activeProjectSlug);
-    const activeProjectImages = this.getProjectImages(activeProject);
     const isProjectOpen = !!projectSlug;
     return (
       <Layout isMain isProjectOpen={isProjectOpen} onClick={() => isProjectOpen && this.goHome()}>

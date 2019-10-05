@@ -15,32 +15,43 @@ const getVerticalShift = firstImage => {
 };
 
 const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
-  const { images, slug, description } = project.fields;
-  const firstImage = images.map(i => i.fields.file.details.image)[0];
-  const verticalShift = getVerticalShift(firstImage);
-  return (
-    <div className={styles.projectBox} style={{ marginBottom: `-${verticalShift}` }}>
-      {images.slice(0, isProjectOpen ? images.length : 1).map((image, imageIndex) => {
-        const isVideo = image.fields.file.contentType.startsWith("video");
-        const projectKey = `${slug}-${imageIndex}`;
-        const isProjectInCache = imageCache.indexOf(projectKey) !== -1;
-        return isVideo ? (
-          <Video muted loop src={image.fields.file.url} />
-        ) : (
-          <Image
-            key={projectKey}
-            style={imageIndex === 0 && { marginTop: `-${verticalShift}` }}
-            index={imageIndex}
-            url={image.fields.file.url}
-            width={image.fields.file.details.image.width}
-            slug={slug}
-            addToCache={addToCache}
-            isInCache={isProjectInCache}
-          />
-        );
-      })}
-    </div>
-  );
+  const { items, slug, description } = project.fields;
+  if (items && items.length > 0) {
+    const firstImage = items
+      .filter(i => i.fields.type === "image")
+      .map(i => i.fields.image.fields.file.details.image)[0];
+    const verticalShift = getVerticalShift(firstImage);
+    return (
+      <div className={styles.projectBox} style={{ marginBottom: `-${verticalShift}` }}>
+        {items.slice(0, isProjectOpen ? items.length : 1).map((item, itemIndex) => {
+          const isVideo = item.fields.type === "video";
+          const itemKey = `${slug}-${itemIndex}`;
+          const isProjectInCache = imageCache.indexOf(itemKey) !== -1;
+          return isVideo ? (
+            <Video
+              key={itemKey}
+              src={item.fields.video.fields.file.url}
+              poster={item.fields.image.fields.file.url}
+              width={item.fields.image.fields.file.details.image.width}
+            />
+          ) : (
+            <Image
+              key={itemKey}
+              style={itemIndex === 0 && { marginTop: `-${verticalShift}` }}
+              index={itemIndex}
+              url={item.fields.image.fields.file.url}
+              width={item.fields.image.fields.file.details.image.width}
+              slug={slug}
+              addToCache={addToCache}
+              isInCache={isProjectInCache}
+            />
+          );
+        })}
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Project;
