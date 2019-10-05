@@ -5,7 +5,7 @@ import Markdown from "../markdown";
 import Video from "../video";
 import styles from "./styles.styl";
 
-const TOP_OFFSET = 20;
+const TOP_OFFSET = 11;
 const MAX_IMAGE_WIDTH = 800;
 
 const getVerticalShift = firstImage => {
