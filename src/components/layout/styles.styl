@@ -18,9 +18,16 @@ $paddingLeftM = pxToRem(6)
     position: relative
     .copyright
       position: absolute
+    .home
+      position: static
 
-//.layoutProjectOpen
-  //cursor: url(/assets/x.svg), auto
+.layoutProjectOpen
+  +mobile()
+    .copyright
+        position: static
+        margin-top: pxToRem(30)
+    .home
+      position: static
 
 .top
   display: flex
@@ -33,7 +40,8 @@ $paddingLeftM = pxToRem(6)
   line-height: (35 / 40)
   z-index: 10
   +mobile()
-    position: static
+    left: $paddingLeftM
+    top: $paddingTopM
 
 .blog
   position: fixed
@@ -45,7 +53,6 @@ $paddingLeftM = pxToRem(6)
     right: $paddingLeftM
 
 .copyright
-.copyrightUnderProject
   position: fixed
   left: $paddingLeft
   bottom: $paddingTop
@@ -54,11 +61,6 @@ $paddingLeftM = pxToRem(6)
   +mobile()
     left: $paddingLeftM
     bottom: $paddingTopM
-
-.copyrightUnderProject
-  +mobile()
-    position: static
-    margin-top: pxToRem(30)
 
 .persian
   width: pxToRem(84)

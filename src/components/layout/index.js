@@ -48,9 +48,7 @@ const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen, ...rest }) 
         <br />
       </Small>
     )}
-    <Small className={isProjectOpen ? styles.copyrightUnderProject : styles.copyright}>
-      © 2019 indgila
-    </Small>
+    <Small className={styles.copyright}>© 2019 indgila</Small>
   </div>
 );
 
