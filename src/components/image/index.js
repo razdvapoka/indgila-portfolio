@@ -32,7 +32,9 @@ class Image extends Component {
 
   getImageUrl = isLowQuality => {
     const { url, width } = this.props;
-    return `${url}?w=${isLowQuality ? width / 2 : width}${isLowQuality ? "&q=1" : ""}`;
+    return `${url}?w=${isLowQuality ? width / 2 : Math.min(width, 1600)}${
+      isLowQuality ? "&q=1" : ""
+    }`;
   };
 
   componentDidMount() {
