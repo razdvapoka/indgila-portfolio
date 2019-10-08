@@ -23,6 +23,13 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
     const verticalShift = getVerticalShift(firstImage);
     return (
       <div className={styles.projectBox} style={{ marginBottom: `-${verticalShift}` }}>
+        {isProjectOpen && project.fields.description && (
+          <Small
+            className={styles.projectDescription}
+            as={Markdown}
+            markdown={project.fields.description}
+          />
+        )}
         {items.slice(0, isProjectOpen ? items.length : 1).map((item, itemIndex) => {
           const isVideo = item.fields.type === "video";
           const itemKey = `${slug}-${itemIndex}`;
