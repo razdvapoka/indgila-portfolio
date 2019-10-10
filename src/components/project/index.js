@@ -37,7 +37,7 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
               key={itemKey}
               src={item.fields.video.fields.file.url}
               poster={item.fields.image.fields.file.url}
-              width={item.fields.image.fields.file.details.image.width}
+              width={item.fields.image.fields.file.details.image.width / 2}
               style={itemIndex === 0 && { marginTop: `-${verticalShift}` }}
             />
           ) : (
