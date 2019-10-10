@@ -17,9 +17,7 @@ const getVerticalShift = firstImage => {
 const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
   const { items, slug, description } = project.fields;
   if (items && items.length > 0) {
-    const firstImage = items
-      .filter(i => i.fields.type === "image")
-      .map(i => i.fields.image.fields.file.details.image)[0];
+    const firstImage = items.map(i => i.fields.image.fields.file.details.image)[0];
     const verticalShift = getVerticalShift(firstImage);
     return (
       <div className={styles.projectBox} style={{ marginBottom: `-${verticalShift}` }}>
@@ -40,6 +38,7 @@ const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
               src={item.fields.video.fields.file.url}
               poster={item.fields.image.fields.file.url}
               width={item.fields.image.fields.file.details.image.width}
+              style={itemIndex === 0 && { marginTop: `-${verticalShift}` }}
             />
           ) : (
             <Image

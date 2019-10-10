@@ -67,7 +67,7 @@ class Video extends Component {
     this.base.firstChild.removeEventListener("webkitendfullscreen", this.pauseVideo);
   }
 
-  render({ width, ...rest }, { isPlaying }) {
+  render({ width, style, ...rest }, { isPlaying }) {
     return (
       <div class={styles.videoBox} onClick={this.handleVideoClick}>
         <video
@@ -77,6 +77,7 @@ class Video extends Component {
           loop
           {...(window.innerWidth >= 600 ? { autoPlay: true } : {})}
           style={{
+            ...style,
             width: window && window.innerWidth < 600 ? "100%" : pxToRem(width)
           }}
         />
