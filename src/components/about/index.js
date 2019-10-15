@@ -1,3 +1,4 @@
+import { EMAIL, FB, IG, PHONE } from "../../consts";
 import { Regular, Small } from "../text";
 import Layout from "../../components/layout";
 import Markdown from "../markdown";
@@ -13,13 +14,18 @@ const About = () => (
         markdown={content.about.fields.description}
       />
       <Regular className={styles.aboutContacts}>
-        <a href="">email</a>
+        <span>{EMAIL}</span>
         <br />
-        <a href="">call</a>
+        <span>{PHONE}</span>
         <br />
-        <a href="">facebook</a>
+        <a href={FB} target="_blank" rel="noopener noreferrer">
+          facebook
+        </a>
         <br />
-        <a href="">instagram</a>
+        <a href={IG} target="_blank" rel="noopener noreferrer">
+          instagram
+        </a>
+        <br />
       </Regular>
       <div className={styles.aboutLists}>
         <div className={styles.aboutListsCol}>
