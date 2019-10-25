@@ -41,6 +41,13 @@ class Main extends Component {
     const isProjectOpen = !!projectSlug;
     return (
       <Layout isMain isProjectOpen={isProjectOpen} onClick={() => isProjectOpen && this.goHome()}>
+        {isProjectOpen && activeProject.fields.description && (
+          <Small
+            className={styles.projectDescription}
+            as={Markdown}
+            markdown={activeProject.fields.description}
+          />
+        )}
         <div>
           {activeProject && (
             <Project

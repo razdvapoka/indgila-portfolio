@@ -23,16 +23,12 @@
     childrenSpacingY(pxToRem(3))
 
 .projectDescription
-  cursor: default
-  position: fixed
-  bottom: pxToRem(50)
-  left: pxToRem(17)
+  display: none
   text-align: left
+  position: static
+  margin-bottom: pxToRem(15)
+  margin-left: pxToRem(-14)
   a
     text-decoration: underline
   +mobile()
-    position: static
-    bottom: auto
-    left: auto
-    margin-bottom: pxToRem(15)
-    margin-left: pxToRem(-14)
+    display: block
