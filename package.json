@@ -8,9 +8,9 @@
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
     "prebuild": "npm run content",
-    "build": "preact build",
+    "build": "preact build --template src/template.html",
     "serve": "preact build && preact serve",
-    "dev": "preact watch",
+    "dev": "preact watch --template src/template.html",
     "lint": "prettier --write src/**/*.js",
     "content": "node get-content.js"
   },

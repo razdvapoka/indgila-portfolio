@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99072020-2"></script> -->
+    <!-- <script> -->
+    <!--   window.dataLayer = window.dataLayer || []; -->
+    <!--   function gtag(){dataLayer.push(arguments);} -->
+    <!--   gtag('js', new Date()); -->
+    <!--   gtag('config', 'UA-99072020-2'); -->
+    <!-- </script> -->
+    <meta charset="utf-8" />
+    <title>Indgila Samad Ali</title>
+    <meta property="og:title" content="Indgila Samad Ali" />
+    <meta
+      property="og:description"
+      content="Indgila Samad Ali is a multidisciplinary designer and art director. She is focusing on pushing the boundaries in branding and creating graphic identities through developing generous but rational visual languages for different clients whether it’s cultural or corporate, non-profit or medical, art or technology."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://indgila.com" />
+    <!-- <meta property="og:image" content="https://bf-weather-app.netlify.com/assets/social-media-preview.jpg" /> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>manifest.json" />
+    <% if (htmlWebpackPlugin.options.manifest.theme_color) { %>
+    <meta name="theme-color" content="<%= htmlWebpackPlugin.options.manifest.theme_color %>" />
+    <% } %> <% const filesRegexp = htmlWebpackPlugin.options.inlineCss ? /\.(chunk\.\w{5}\.css|js)$/
+    : /\.(css|js)$/;%>
+  </head>
+  <body>
+    <%= htmlWebpackPlugin.options.ssr() %> <% if (webpack.assets.filter(entry =>
+    entry.name.match(/bundle(\.\w{5})?.esm.js$/)).length > 0) { %> <% /* Fix for safari < 11
+    nomodule bug. TODO: Do the following only for safari. */ %>
+    <script>
+      !(function() {
+        var e = document,
+          t = e.createElement("script");
+        if (!("noModule" in t) && "onbeforeload" in t) {
+          var n = !1;
+          e.addEventListener(
+            "beforeload",
+            function(e) {
+              if (e.target === t) n = !0;
+              else if (!e.target.hasAttribute("nomodule") || !n) return;
+              e.preventDefault();
+            },
+            !0
+          ),
+            (t.type = "module"),
+            (t.src = "."),
+            e.head.appendChild(t),
+            t.remove();
+        }
+      })();
+    </script>
+    <script
+      crossorigin="anonymous"
+      src="<%= htmlWebpackPlugin.files.publicPath %><%= webpack.assets.filter(entry => entry.name.match(/bundle(\.\w{5})?.esm.js$/))[0].name %>"
+      type="module"
+    ></script>
+    <% /*Fetch and Promise polyfills are not needed for browsers that support type=module Please
+    re-evaluate below line if adding more polyfills.*/ %>
+    <script nomodule>
+      window.fetch ||
+        document.write(
+          '<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>'
+        );
+    </script>
+    <script nomodule defer src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"></script>
+    <% } else { %>
+    <script <%="htmlWebpackPlugin.options.scriptLoading" %>
+      src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>">
+    </script>
+    <script>
+      window.fetch ||
+        document.write(
+          '<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>'
+        );
+    </script>
+    <% } %>
+  </body>
+</html>
