@@ -23,9 +23,13 @@ $paddingLeftM = pxToRem(6)
 
 .layoutProjectOpen
   +mobile()
+    display: flex
+    flex-direction: column
+    min-height: 100vh
     .copyright
         position: static
-        margin-top: pxToRem(30)
+        margin-top: auto
+        z-index: 10
     .home
       position: static
 
