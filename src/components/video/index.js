@@ -69,7 +69,7 @@ class Video extends Component {
 
   render({ width, style, ...rest }, { isPlaying }) {
     return (
-      <div class={styles.videoBox} onClick={this.handleVideoClick}>
+      <div class={`${styles.videoBox} video-box`} onClick={this.handleVideoClick}>
         <video
           {...rest}
           class={styles.video}
