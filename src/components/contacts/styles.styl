@@ -1,0 +1,20 @@
+@import '../../style/utils.styl'
+@import '../../style/media.styl'
+
+.contactsM
+  display: none
+  +mobile()
+    display: block
+    margin-top: pxToRem(20)
+
+.contacts
+  position: fixed
+  left: pxToRem(17)
+  bottom: pxToRem(51)
+  line-height: (22 / 20)
+  a
+    text-decoration: underline
+  +mobile()
+    display: none
+
+

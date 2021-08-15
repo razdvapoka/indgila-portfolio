@@ -10,7 +10,7 @@ import ProjectList from "../project-list";
 import content from "../../../content.json";
 import styles from "./styles.styl";
 
-class Main extends Component {
+class Projects extends Component {
   state = {
     selectedProjectSlug: null,
     imageCache: []
@@ -33,14 +33,14 @@ class Main extends Component {
     });
   };
 
-  goHome = () => route("/");
+  goHome = () => route("/about");
 
   render({ projectSlug }, { selectedProjectSlug, imageCache }) {
     const activeProjectSlug = projectSlug || selectedProjectSlug;
     const activeProject = this.getProjectBySlug(activeProjectSlug);
     const isProjectOpen = !!projectSlug;
     return (
-      <Layout isMain isProjectOpen={isProjectOpen} onClick={() => isProjectOpen && this.goHome()}>
+      <Layout isProjectOpen={isProjectOpen} onClick={() => isProjectOpen && this.goHome()}>
         {isProjectOpen && activeProject.fields.description && (
           <Small
             className={styles.projectDescription}
@@ -69,4 +69,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default Projects;

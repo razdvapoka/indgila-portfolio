@@ -1,6 +1,6 @@
-import { EMAIL, FB, IG, PHONE } from "../../consts";
 import { Regular, Small } from "../text";
 import Layout from "../../components/layout";
+import Contacts from "../contacts";
 import Markdown from "../markdown";
 import content from "../../../content.json";
 import styles from "./styles.styl";
@@ -9,27 +9,14 @@ const About = () => {
   const { experience, lectures, exhibitions, publications } = content.about.fields;
   const columnItemsMarkdown = [experience, lectures, exhibitions, publications].join("\n\n");
   return (
-    <Layout blogUrl={content.about.fields.blogUrl}>
+    <Layout isAbout>
       <div className={styles.about}>
         <Regular
           className={styles.aboutDescription}
           as={Markdown}
           markdown={content.about.fields.description}
         />
-        <Regular className={styles.aboutContacts}>
-          <span>{EMAIL}</span>
-          <br />
-          <span>{PHONE}</span>
-          <br />
-          <a href={FB} target="_blank" rel="noopener noreferrer">
-            facebook
-          </a>
-          <br />
-          <a href={IG} target="_blank" rel="noopener noreferrer">
-            instagram
-          </a>
-          <br />
-        </Regular>
+        <Contacts isMobile />
         <Small as={Markdown} className={styles.aboutColumns} markdown={columnItemsMarkdown} />
       </div>
     </Layout>
