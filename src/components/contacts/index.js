@@ -2,10 +2,9 @@ import { EMAIL, IG } from "../../consts";
 import styles from "./styles.styl";
 import content from "../../../content.json";
 
-const Contacts = ({ isMobile }) => {
-  const className = isMobile ? `${styles.contactsM} regular-text` : `${styles.contacts} small-text`;
+const Contacts = () => {
   return (
-    <div className={className}>
+    <div className={styles.contacts}>
       <span>{EMAIL}</span>
       <br />
       <a href={IG} target="_blank" rel="noopener noreferrer">

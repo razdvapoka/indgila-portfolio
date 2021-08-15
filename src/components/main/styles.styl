@@ -1,13 +1,22 @@
 @import '../../style/utils.styl'
 @import '../../style/media.styl'
 
-.projectDescription
-  cursor: default
-  position: fixed
-  bottom: pxToRem(50)
-  left: pxToRem(17)
-  text-align: left
+.main
+  margin: 0 auto
+  max-width: pxToRem(950)
+  margin-bottom: pxToRem(40)
+  blockquote
+    text-align: right
+    +mobile()
+      text-align: left
   a
     text-decoration: underline
   +mobile()
-    display: none
+    margin-top: pxToRem(12)
+    margin-bottom: 0
+  &Description
+    childrenSpacingY(pxToRem(40))
+    del
+      text-decoration: underline
+    +mobile()
+      childrenSpacingY(pxToRem(20))
