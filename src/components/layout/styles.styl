@@ -13,6 +13,9 @@ $paddingLeftM = pxToRem(6)
     padding: $paddingTopM $paddingLeftM
 
 .layoutMain
+  min-height: 100vh
+  display: flex
+  flex-direction: column
   +mobile()
     padding: $paddingTopM $paddingLeftM pxToRem(71)
     position: relative

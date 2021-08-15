@@ -1,22 +1,65 @@
 @import '../../style/utils.styl'
 @import '../../style/media.styl'
 
+.mainBox
+  flex: 1
+  display: flex
+  font-size: pxToRem(20)
+  line-height: (22 / 20)
+
 .main
-  margin: 0 auto
-  max-width: pxToRem(950)
-  margin-bottom: pxToRem(40)
-  blockquote
-    text-align: right
-    +mobile()
-      text-align: left
+  flex: 2
+  display: flex
+  flex-direction: column
+  padding-bottom: pxToRem(50)
   a
     text-decoration: underline
-  +mobile()
-    margin-top: pxToRem(12)
-    margin-bottom: 0
-  &Description
-    childrenSpacingY(pxToRem(40))
-    del
-      text-decoration: underline
-    +mobile()
-      childrenSpacingY(pxToRem(20))
+
+.roll
+  flex: 4
+  margin-left: pxToRem(100)
+  position: relative
+  display: flex
+  align-items: flex-end
+  &Image
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 100%
+  &Text
+    padding: 0 pxToRem(32)
+    position: relative
+    z-index: 100
+
+
+
+.descriptionBox
+  position: relative
+  flex: 1
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.description
+  line-height: (23 /20)
+  del
+    text-decoration: underline
+
+.collaborations
+  display: flex
+  justify-content: space-between
+  ul
+    list-style: none
+  ul > li
+    cursor: pointer
+  ul > li:hover
+    text-decoration: underline
+
+.projectPreviewImageBox
+  pointer-events: none
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  width: 90%

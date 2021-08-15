@@ -10,7 +10,6 @@ class Image extends Component {
 
   checkVisibility = intersectionEntries => {
     const { observer } = this.state;
-    const { slug, index } = this.props;
     if (intersectionEntries[0].intersectionRatio > 0) {
       this.loadImage();
       if (observer) {
@@ -21,7 +20,7 @@ class Image extends Component {
   };
 
   loadImage = () => {
-    const { url, width, index, slug, addToCache } = this.props;
+    const { index, slug, addToCache } = this.props;
     const image = new window.Image();
     image.onload = () => {
       this.setState({ isLoaded: true });
@@ -32,7 +31,7 @@ class Image extends Component {
 
   getImageUrl = isLowQuality => {
     const { url, width } = this.props;
-    return `${url}?w=${isLowQuality ? width / 2 : Math.min(width, 1600)}${
+    return `${url}?w=${isLowQuality ? Math.floor(width / 2) : Math.min(width, 1600)}${
       isLowQuality ? "&q=1" : ""
     }`;
   };
@@ -45,16 +44,17 @@ class Image extends Component {
     }
   }
 
-  render({ url, width, style, ...rest }, { isLoaded }) {
+  render({ url, width, style, overrideStyle = false, ...rest }, { isLoaded }) {
     const src = this.getImageUrl(!isLoaded);
+    const realWidth = window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2);
+    const realStyle = overrideStyle
+      ? { width: realWidth, ...style }
+      : { ...style, width: realWidth };
     return (
       <img
         className={isLoaded ? styles.image : styles.imagePreview}
         src={src}
-        style={{
-          ...style,
-          width: window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2)
-        }}
+        style={realStyle}
         {...rest}
       />
     );

@@ -15,7 +15,7 @@ const getVerticalShift = firstImage => {
 };
 
 const Project = ({ project, isProjectOpen, imageCache, addToCache }) => {
-  const { items, slug, description } = project.fields;
+  const { items, slug } = project.fields;
   if (items && items.length > 0) {
     const firstImage = items.map(i => i.fields.image.fields.file.details.image)[0];
     const verticalShift = getVerticalShift(firstImage);
