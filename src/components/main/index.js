@@ -7,7 +7,7 @@ import styles from "./styles.styl";
 import { Component } from "preact";
 import Image from "../image";
 
-const ProjectPreview = ({ title, id, setActiveProjectPreviewId }) => {
+const ProjectPreview = ({ title, id, setActiveProjectPreviewId, activeProjectPreviewId }) => {
   return (
     <li
       onMouseEnter={() => {
@@ -22,7 +22,7 @@ const ProjectPreview = ({ title, id, setActiveProjectPreviewId }) => {
       }}
       onClick={() => {
         if (window.hasTouchEvents) {
-          setActiveProjectPreviewId(id ? null : id);
+          setActiveProjectPreviewId(activeProjectPreviewId ? null : id);
         }
       }}
     >
@@ -31,7 +31,12 @@ const ProjectPreview = ({ title, id, setActiveProjectPreviewId }) => {
   );
 };
 
-const ProjectPreviewList = ({ items, title, setActiveProjectPreviewId }) => {
+const ProjectPreviewList = ({
+  items,
+  title,
+  setActiveProjectPreviewId,
+  activeProjectPreviewId
+}) => {
   return (
     <div>
       <div>{title}</div>
@@ -42,6 +47,7 @@ const ProjectPreviewList = ({ items, title, setActiveProjectPreviewId }) => {
             id={item.sys.id}
             title={item.fields.title}
             setActiveProjectPreviewId={setActiveProjectPreviewId}
+            activeProjectPreviewId={activeProjectPreviewId}
           />
         ))}
       </ul>
@@ -131,11 +137,13 @@ class Main extends Component {
                 items={currentCollaborations}
                 title="Current сollaborations"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
+                activeProjectPreviewId={activeProjectPreviewId}
               />
               <ProjectPreviewList
                 items={latestCollaborations}
                 title="Latest сollaborations"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
+                activeProjectPreviewId={activeProjectPreviewId}
               />
             </div>
             <div className={styles.descriptionBox}>
