@@ -22,7 +22,7 @@ const ProjectPreview = ({ title, id, setActiveProjectPreviewId, activeProjectPre
       }}
       onClick={() => {
         if (window.hasTouchEvents) {
-          setActiveProjectPreviewId(activeProjectPreviewId ? null : id);
+          setActiveProjectPreviewId(id === activeProjectPreviewId ? null : id);
         }
       }}
     >
