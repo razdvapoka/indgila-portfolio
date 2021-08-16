@@ -46,7 +46,8 @@ class Image extends Component {
 
   render({ url, width, style, overrideStyle = false, ...rest }, { isLoaded }) {
     const src = this.getImageUrl(!isLoaded);
-    const realWidth = window && window.innerWidth < 600 ? "100%" : pxToRem(width / 2);
+    const realWidth =
+      typeof window !== "undefined" && window.innerWidth < 600 ? "100%" : pxToRem(width / 2);
     const realStyle = overrideStyle
       ? { width: realWidth, ...style }
       : { ...style, width: realWidth };
