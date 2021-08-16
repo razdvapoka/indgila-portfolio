@@ -10,8 +10,16 @@ import Image from "../image";
 const ProjectPreview = ({ title, id, setActiveProjectPreviewId }) => {
   return (
     <li
-      onMouseEnter={() => setActiveProjectPreviewId(id)}
-      onMouseLeave={() => setActiveProjectPreviewId(null)}
+      onMouseEnter={() => {
+        if (!window.hasTouchEvents) {
+          setActiveProjectPreviewId(id);
+        }
+      }}
+      onMouseLeave={() => {
+        if (!window.hasTouchEvents) {
+          setActiveProjectPreviewId(null);
+        }
+      }}
       onClick={() => {
         if (window.hasTouchEvents) {
           setActiveProjectPreviewId(id ? null : id);
