@@ -19,14 +19,18 @@ renderer.link = function(href) {
   }
 };
 
-const Markdown = ({ markdown, markupOpts = {}, markdownOpts = {}, ...rest }) => (
-  <Markup
-    markup={marked(markdown, { breaks: true, renderer, ...markdownOpts })}
-    trim={false}
-    type="html"
-    components={{ Link: CustomLink }}
-    {...rest}
-  />
-);
+const Markdown = ({ markdown, markupOpts = {}, markdownOpts = {}, ...rest }) => {
+  const parser = typeof document === "undefined" && require("dom-parser");
+  return (
+    <Markup
+      parser={parser}
+      markup={marked(markdown, { breaks: true, renderer, ...markdownOpts })}
+      trim={false}
+      type="html"
+      components={{ Link: CustomLink }}
+      {...rest}
+    />
+  );
+};
 
 export default Markdown;

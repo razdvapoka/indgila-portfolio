@@ -6,13 +6,17 @@ import content from "../../../content.json";
 import styles from "./styles.styl";
 import { Component } from "preact";
 import Image from "../image";
-import { queue } from "async";
 
 const ProjectPreview = ({ title, id, setActiveProjectPreviewId }) => {
   return (
     <li
       onMouseEnter={() => setActiveProjectPreviewId(id)}
       onMouseLeave={() => setActiveProjectPreviewId(null)}
+      onClick={() => {
+        if (window.hasTouchEvents) {
+          setActiveProjectPreviewId(id ? null : id);
+        }
+      }}
     >
       {title}
     </li>
@@ -39,18 +43,20 @@ const ProjectPreviewList = ({ items, title, setActiveProjectPreviewId }) => {
 
 class Roll extends Component {
   state = {
-    queue: this.props.items
+    queue: this.props.items,
+    currentNumber: 1
   };
 
   handleClick = () => {
-    this.setState(({ queue }) => ({
-      queue: [queue[queue.length - 1], ...queue.slice(0, queue.length - 1)]
+    this.setState(({ queue, currentNumber }) => ({
+      queue: [queue[queue.length - 1], ...queue.slice(0, queue.length - 1)],
+      currentNumber: (currentNumber % queue.length) + 1
     }));
   };
 
   render() {
     const { imageCache, addToCache } = this.props;
-    const { queue } = this.state;
+    const { queue, currentNumber } = this.state;
     return (
       <div className={styles.roll}>
         {queue.map((item, itemIndex) => {
@@ -70,7 +76,12 @@ class Roll extends Component {
             </div>
           );
         })}
-        <Markdown className={styles.rollText} markdown={queue[0].fields.description} />
+        <div className={styles.rollText}>
+          <Markdown markdown={queue[0].fields.description} />
+          <div className={styles.rollNumber}>
+            {currentNumber}/{queue.length}
+          </div>
+        </div>
       </div>
     );
   }
@@ -133,7 +144,9 @@ class Main extends Component {
               )}
               <Markdown className={styles.description} markdown={mainText} />
             </div>
-            <Contacts />
+            <div className={styles.contacts}>
+              <Contacts />
+            </div>
           </div>
           <Roll items={roll} imageCache={imageCache} addToCache={this.addToCache} />
         </div>
