@@ -10,6 +10,8 @@
   position: relative
   +mobile()
     flex-direction: column-reverse
+    font-size: pxToRem(16.41)
+    line-height: (23 / 20)
 
 .main
   flex: 44
@@ -21,34 +23,52 @@
     text-decoration: underline
   +mobile()
     padding-right: 0
+    padding-bottom: 0
+    flex: 1
 
 .roll
   flex: 55
-  position: relative
   display: flex
-  align-items: flex-end
+  flex-direction: column
   +mobile()
-    min-height: 110vw
-    margin-bottom: pxToRem(26)
+    flex: 1
+    display: block
+    margin-bottom: pxToRem(21.33)
+  &ImageBox
+    flex: 1
+    position: relative
+    overflow: hidden
+    margin-bottom: pxToRem(20)
+    +mobile()
+      min-height: 70vw
+      margin-bottom: pxToRem(9.84)
   &Image
     position: absolute
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
     width: 100%
+    +mobile()
+      width: 90%
   &Text
     min-height: pxToRem(43)
     position: relative
     z-index: 100
     +mobile()
-      padding: 0 0 pxToRem(26) 0
-      font-size: pxToRem(14)
+      font-size: pxToRem(13.12)
       line-height: (16 / 14)
+      min-height: auto
   &Number
     position: absolute
     right: 100%
     top: 0
     transform: translateX(pxToRem(-30))
+    +mobile()
+      position: static
+      transform: none
+      margin-top: pxToRem(8.2)
+      font-size: pxToRem(13.12)
+      line-height: (16 / 14)
 
 .descriptionBox
   position: relative
@@ -56,6 +76,9 @@
   display: flex
   flex-direction: column
   justify-content: center
+  +mobile()
+    order: 1
+    margin-bottom: pxToRem(21.33)
 
 .description
   line-height: (23 /20)
@@ -64,8 +87,14 @@
 
 .collaborations
   display: flex
+  +mobile()
+    flex-direction: column
+    order: 2
   > * + *
     margin-left: pxToRem(56)
+    +mobile()
+      margin-left: 0
+      margin-top: pxToRem(21.33)
   ul
     display: block
     list-style: none
@@ -73,6 +102,9 @@
     cursor: pointer
   ul > li:hover
     text-decoration: underline
+  ul > li:first-child
+    +mobile()
+      margin-top: pxToRem(9.84)
 
 .projectPreviewImageBox
   pointer-events: none
@@ -81,8 +113,17 @@
   top: 50%
   transform: translate(-50%, -50%)
   width: 90%
+  +mobile()
+    width: auto
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
 
 .contacts
   position: absolute
   left: pxToRem(260)
   bottom: 0
+  +mobile()
+    order: 3
+    position: static

@@ -3,7 +3,11 @@ import marked from "marked";
 import { Link } from "preact-router";
 
 const CustomLink = ({ href, title }) => {
-  return <Link href={href}>{title}</Link>;
+  return (
+    <Link className="projects-link" href={href}>
+      {title}
+    </Link>
+  );
 };
 
 const renderer = new marked.Renderer();

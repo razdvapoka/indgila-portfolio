@@ -59,23 +59,25 @@ class Roll extends Component {
     const { queue, currentNumber } = this.state;
     return (
       <div className={styles.roll}>
-        {queue.map((item, itemIndex) => {
-          const isInCache = imageCache.indexOf(`${item.sys.id}-0`) !== -1;
-          return (
-            <div key={item.sys.id} className={styles.rollImage} onClick={this.handleClick}>
-              <Image
-                index={0}
-                slug={item.sys.id}
-                url={item.fields.image.fields.file.url}
-                width={item.fields.image.fields.file.details.image.width}
-                addToCache={addToCache}
-                isInCache={isInCache}
-                style={{ width: "100%", zIndex: queue.length - itemIndex, cursor: "pointer" }}
-                overrideStyle
-              />
-            </div>
-          );
-        })}
+        <div className={styles.rollImageBox}>
+          {queue.map((item, itemIndex) => {
+            const isInCache = imageCache.indexOf(`${item.sys.id}-0`) !== -1;
+            return (
+              <div key={item.sys.id} className={styles.rollImage} onClick={this.handleClick}>
+                <Image
+                  index={0}
+                  slug={item.sys.id}
+                  url={item.fields.image.fields.file.url}
+                  width={item.fields.image.fields.file.details.image.width}
+                  addToCache={addToCache}
+                  isInCache={isInCache}
+                  style={{ width: "100%", zIndex: queue.length - itemIndex, cursor: "pointer" }}
+                  overrideStyle
+                />
+              </div>
+            );
+          })}
+        </div>
         <div className={styles.rollText}>
           <Markdown markdown={queue[0].fields.description} />
           <div className={styles.rollNumber}>
