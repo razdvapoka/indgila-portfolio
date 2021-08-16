@@ -10,6 +10,7 @@ import Image from "../image";
 const ProjectPreview = ({ title, id, setActiveProjectPreviewId, activeProjectPreviewId }) => {
   return (
     <li
+      className={id === activeProjectPreviewId ? styles.activeProjectPreview : ""}
       onMouseEnter={() => {
         if (!window.hasTouchEvents) {
           setActiveProjectPreviewId(id);
