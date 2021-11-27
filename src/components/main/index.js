@@ -59,26 +59,32 @@ const ProjectPreviewList = ({
 class Roll extends Component {
   state = {
     queue: this.props.items,
-    currentNumber: 1
+    topItemIndex: 0
   };
 
   handleClick = () => {
-    this.setState(({ queue, currentNumber }) => ({
-      queue: [queue[queue.length - 1], ...queue.slice(0, queue.length - 1)],
-      currentNumber: (currentNumber % queue.length) + 1
+    this.setState(({ queue, topItemIndex }) => ({
+      topItemIndex: (topItemIndex + 1) % queue.length
     }));
   };
 
   render() {
     const { imageCache, addToCache } = this.props;
-    const { queue, currentNumber } = this.state;
+    const { queue, topItemIndex } = this.state;
     return (
       <div className={styles.roll}>
         <div className={styles.rollImageBox}>
           {queue.map((item, itemIndex) => {
             const isInCache = imageCache.indexOf(`${item.sys.id}-0`) !== -1;
             return (
-              <div key={item.sys.id} className={styles.rollImage} onClick={this.handleClick}>
+              <div
+                key={item.sys.id}
+                className={styles.rollImage}
+                onClick={this.handleClick}
+                style={{
+                  zIndex: (queue.length - 1 - itemIndex + topItemIndex) % queue.length
+                }}
+              >
                 <Image
                   index={0}
                   slug={item.sys.id}
@@ -86,7 +92,10 @@ class Roll extends Component {
                   width={item.fields.image.fields.file.details.image.width}
                   addToCache={addToCache}
                   isInCache={isInCache}
-                  style={{ width: "100%", zIndex: queue.length - itemIndex, cursor: "pointer" }}
+                  style={{
+                    width: "100%",
+                    cursor: "pointer"
+                  }}
                   overrideStyle
                 />
               </div>
@@ -94,9 +103,9 @@ class Roll extends Component {
           })}
         </div>
         <div className={styles.rollText}>
-          <Markdown markdown={queue[0].fields.description} />
+          <Markdown markdown={queue[topItemIndex].fields.description} />
           <div className={styles.rollNumber}>
-            {currentNumber}/{queue.length}
+            {topItemIndex + 1}/{queue.length}
           </div>
         </div>
       </div>
