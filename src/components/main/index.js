@@ -145,13 +145,13 @@ class Main extends Component {
             <div className={styles.collaborations}>
               <ProjectPreviewList
                 items={currentCollaborations}
-                title="Current сollaborations"
+                title="Current"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
                 activeProjectPreviewId={activeProjectPreviewId}
               />
               <ProjectPreviewList
                 items={latestCollaborations}
-                title="Latest сollaborations"
+                title="Latest"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
                 activeProjectPreviewId={activeProjectPreviewId}
               />
