@@ -2,20 +2,20 @@ import Markup from "preact-markup";
 import marked from "marked";
 import { Link } from "preact-router";
 
-const CustomLink = ({ href, title }) => {
+const CustomLink = ({ href, text }) => {
   return (
     <Link className="projects-link" href={href}>
-      {title}
+      {text}
     </Link>
   );
 };
 
 const renderer = new marked.Renderer();
-renderer.link = function(href) {
+renderer.link = function(href, title, text) {
   const link = marked.Renderer.prototype.link.apply(this, arguments);
   if (href === "/projects") {
     return link
-      .replace("<a", "<link ")
+      .replace("<a", `<link title="${title}" text="${text}" `)
       .replace("a>", "link>")
       .replace(/\>.+\</, "");
   } else {
