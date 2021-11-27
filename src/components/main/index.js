@@ -58,7 +58,7 @@ const ProjectPreviewList = ({
 
 class Roll extends Component {
   state = {
-    queue: this.props.items,
+    queue: this.props.items.reverse(),
     topItemIndex: 0
   };
 
