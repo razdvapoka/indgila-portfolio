@@ -25,11 +25,9 @@ const Layout = ({ children, isMain, isProjectOpen, ...rest }) => (
     `}
     {...rest}
   >
-    {!isMain && (
-      <div className={styles.top}>
-        <HomeLink />
-      </div>
-    )}
+    <div className={styles.top}>
+      <HomeLink />
+    </div>
     {children}
     <Small className={styles.copyright}>© {year} indgila</Small>
   </div>

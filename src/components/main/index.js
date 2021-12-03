@@ -143,15 +143,15 @@ class Main extends Component {
         <div className={styles.mainBox}>
           <div className={styles.main}>
             <div className={styles.collaborations}>
-              <ProjectPreviewList
+              {/* <ProjectPreviewList
                 items={currentCollaborations}
                 title="Current"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
                 activeProjectPreviewId={activeProjectPreviewId}
-              />
+              /> */}
               <ProjectPreviewList
                 items={latestCollaborations}
-                title="Latest"
+                title="Latest Projects"
                 setActiveProjectPreviewId={this.setActiveProjectPreviewId}
                 activeProjectPreviewId={activeProjectPreviewId}
               />
