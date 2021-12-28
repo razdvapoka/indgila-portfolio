@@ -25,7 +25,7 @@ renderer.link = function(href, title, text) {
 
 const Markdown = ({ markdown, markupOpts = {}, markdownOpts = {}, ...rest }) => {
   const parser = typeof document === "undefined" && require("dom-parser");
-  return (
+  return markdown ? (
     <Markup
       parser={parser}
       markup={marked(markdown, { breaks: true, renderer, ...markdownOpts })}
@@ -34,7 +34,7 @@ const Markdown = ({ markdown, markupOpts = {}, markdownOpts = {}, ...rest }) => 
       components={{ Link: CustomLink }}
       {...rest}
     />
-  );
+  ) : null;
 };
 
 export default Markdown;

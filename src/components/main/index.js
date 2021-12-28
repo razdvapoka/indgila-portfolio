@@ -71,6 +71,7 @@ class Roll extends Component {
   render() {
     const { imageCache, addToCache } = this.props;
     const { queue, topItemIndex } = this.state;
+    const description = queue[topItemIndex].fields.description;
     return (
       <div className={styles.roll}>
         <div className={styles.rollImageBox}>
@@ -103,7 +104,7 @@ class Roll extends Component {
           })}
         </div>
         <div className={styles.rollText}>
-          <Markdown markdown={queue[topItemIndex].fields.description} />
+          <Markdown markdown={description} />
           <div className={styles.rollNumber}>
             {topItemIndex + 1}/{queue.length}
           </div>
