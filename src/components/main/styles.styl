@@ -14,20 +14,18 @@
     line-height: (23 / 20)
 
 .main
-  flex: 44
+  flex: 1
   display: flex
   flex-direction: column
-  padding-bottom: pxToRem(50)
-  padding-right: pxToRem(100)
+  padding-right: 1rem
   a
     text-decoration: underline
   +mobile()
     padding-right: 0
-    padding-bottom: 0
     flex: 1
 
 .roll
-  flex: 55
+  flex: 1
   display: flex
   flex-direction: column
   +mobile()
@@ -77,6 +75,7 @@
   display: flex
   flex-direction: column
   justify-content: center
+  overflow: hidden
   +mobile()
     order: 1
     margin-bottom: pxToRem(21.33)
@@ -87,7 +86,7 @@
     text-decoration: underline
 
 .collaborations
-  padding-left: 6.5rem 
+  padding-left: 6.5rem
   +mobile()
     order: 2
     padding-left: 0

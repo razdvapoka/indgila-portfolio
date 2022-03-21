@@ -7,55 +7,6 @@ import styles from "./styles.styl";
 import { Component } from "preact";
 import Image from "../image";
 
-const ProjectPreview = ({ title, id, setActiveProjectPreviewId, activeProjectPreviewId }) => {
-  return (
-    <li
-      className={id === activeProjectPreviewId ? styles.activeProjectPreview : ""}
-      onMouseEnter={() => {
-        if (!window.hasTouchEvents) {
-          setActiveProjectPreviewId(id);
-        }
-      }}
-      onMouseLeave={() => {
-        if (!window.hasTouchEvents) {
-          setActiveProjectPreviewId(null);
-        }
-      }}
-      onClick={() => {
-        if (window.hasTouchEvents) {
-          setActiveProjectPreviewId(id === activeProjectPreviewId ? null : id);
-        }
-      }}
-    >
-      {title}
-    </li>
-  );
-};
-
-const ProjectPreviewList = ({
-  items,
-  title,
-  setActiveProjectPreviewId,
-  activeProjectPreviewId
-}) => {
-  return (
-    <div>
-      <div>{title}</div>
-      <ul>
-        {items.map(item => (
-          <ProjectPreview
-            key={item.sys.id}
-            id={item.sys.id}
-            title={item.fields.title}
-            setActiveProjectPreviewId={setActiveProjectPreviewId}
-            activeProjectPreviewId={activeProjectPreviewId}
-          />
-        ))}
-      </ul>
-    </div>
-  );
-};
-
 class Roll extends Component {
   state = {
     queue: this.props.items.reverse(),
@@ -143,20 +94,7 @@ class Main extends Component {
       <Layout isMain>
         <div className={styles.mainBox}>
           <div className={styles.main}>
-            <div className={styles.collaborations}>
-              {/* <ProjectPreviewList
-                items={currentCollaborations}
-                title="Current"
-                setActiveProjectPreviewId={this.setActiveProjectPreviewId}
-                activeProjectPreviewId={activeProjectPreviewId}
-              /> */}
-              <ProjectPreviewList
-                items={latestCollaborations}
-                title="Latest Projects"
-                setActiveProjectPreviewId={this.setActiveProjectPreviewId}
-                activeProjectPreviewId={activeProjectPreviewId}
-              />
-            </div>
+            <div className={styles.collaborations}></div>
             <div className={styles.descriptionBox}>
               {activeProjectPreview && (
                 <div className={styles.projectPreviewImageBox}>
@@ -171,7 +109,7 @@ class Main extends Component {
                   />
                 </div>
               )}
-              <Markdown className={styles.description} markdown={mainText} />
+              <Markdown className={`regular-text ${styles.description}`} markdown={mainText} />
             </div>
             <div className={styles.contacts}>
               <Contacts />
