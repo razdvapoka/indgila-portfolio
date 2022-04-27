@@ -34,7 +34,8 @@ class Roll extends Component {
                 className={styles.rollImage}
                 onClick={this.handleClick}
                 style={{
-                  zIndex: (queue.length - 1 - itemIndex + topItemIndex) % queue.length
+                  display: itemIndex === topItemIndex ? "block" : "none"
+                  // zIndex: (queue.length - 1 - itemIndex + topItemIndex) % queue.length
                 }}
               >
                 <Image
