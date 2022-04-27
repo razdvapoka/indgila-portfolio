@@ -48,6 +48,7 @@ class Roll extends Component {
                     width: "100%",
                     cursor: "pointer"
                   }}
+                  enableSizeMod={false}
                   overrideStyle
                 />
               </div>

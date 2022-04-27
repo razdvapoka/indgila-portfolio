@@ -30,10 +30,10 @@ class Image extends Component {
   };
 
   getImageUrl = isLowQuality => {
-    const { url, width } = this.props;
-    return `${url}?w=${isLowQuality ? Math.floor(width / 2) : Math.min(width, 1600)}${
-      isLowQuality ? "&q=1" : ""
-    }`;
+    const { url, width, enableSizeMod } = this.props;
+    return `${url}?${
+      enableSizeMod ? `w=${isLowQuality ? Math.floor(width / 2) : Math.min(width, 1600)}` : ""
+    }${isLowQuality ? "&q=1" : ""}`;
   };
 
   componentDidMount() {
@@ -44,7 +44,10 @@ class Image extends Component {
     }
   }
 
-  render({ url, width, style, overrideStyle = false, ...rest }, { isLoaded }) {
+  render(
+    { url, width, style, overrideStyle = false, enableSizeMod = true, ...rest },
+    { isLoaded }
+  ) {
     const src = this.getImageUrl(!isLoaded);
     const realWidth =
       typeof window !== "undefined" && window.innerWidth < 600 ? "100%" : pxToRem(width / 2);
@@ -55,7 +58,7 @@ class Image extends Component {
       <img
         className={isLoaded ? styles.image : styles.imagePreview}
         src={src}
-        style={realStyle}
+        style={enableSizeMod ? realStyle : style}
         {...rest}
       />
     );
