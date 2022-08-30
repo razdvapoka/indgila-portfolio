@@ -2,7 +2,7 @@ import styles from "./styles.styl";
 import { Regular, Small } from "../../components/text";
 import { Link } from "preact-router";
 import PersianName from "../../components/persian-name";
-import { FB, IG, PHONE, EMAIL } from "../../consts";
+import { FB, IG, EMAIL } from "../../consts";
 
 const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen, ...rest }) => (
   <div
@@ -38,8 +38,6 @@ const Layout = ({ children, isMain, hasCopy, blogUrl, isProjectOpen, ...rest }) 
     {!isMain && (
       <Small className={styles.contacts}>
         <span>{EMAIL}</span>
-        <br />
-        <span>{PHONE}</span>
         <br />
         <a href={FB} target="_blank" rel="noopener noreferrer">
           facebook

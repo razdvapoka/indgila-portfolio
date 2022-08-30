@@ -1,4 +1,4 @@
-import { EMAIL, FB, IG, PHONE } from "../../consts";
+import { EMAIL, FB, IG } from "../../consts";
 import { Regular, Small } from "../text";
 import Layout from "../../components/layout";
 import Markdown from "../markdown";
@@ -18,8 +18,6 @@ const About = () => {
         />
         <Regular className={styles.aboutContacts}>
           <span>{EMAIL}</span>
-          <br />
-          <span>{PHONE}</span>
           <br />
           <a href={FB} target="_blank" rel="noopener noreferrer">
             facebook
